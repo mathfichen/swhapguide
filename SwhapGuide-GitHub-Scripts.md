@@ -142,6 +142,8 @@ In this guide we will show you how to do it using Github, and you will therefore
 
 [^5]: https://github.com/signup
 
+///////////////Probably possible to remove//////////
+
 A Unix Console
 ----------------------------------
 
@@ -184,7 +186,9 @@ The archiving process will require you to interact with Github from your Linux c
 You are done with the settings and you are now ready to archive your code into the Software Heritage Universal Archive!
 
 [^7]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
-    
+
+/////////////////////////////////
+	
 Preparing your source code for archiving {#sec:prepare}
 ======================================
 
@@ -225,16 +229,6 @@ If the code is only available in non digital form (e.g. printed listings), you c
 
 ![Make your source code machine readable.](./media2/09_OCR.PNG){#fig:OCR}
 
-
-#### Unpacking your code & flattening of tarballs
-If the raw source code is an archived and/or compressed file (.tar or .zip), you should unpack it locally on your computer. 
-
-Tarballs distributed by projects often include a single top-level directory
-(e.g., `project-1.0/`) to avoid “tarbombs.” For curation purposes, such
-artificial wrappers should be stripped so that all source files live at the
-root of the curated version directory.
-
-For historical accuracy purpose we will upload both your source code in its initial format, and in its machine-readable format. 
 
 Set up your working environment
 ----------------------------------
@@ -288,6 +282,17 @@ To synchronize our local Workbench with the remote repository, we run the follow
 The resulting state of `raw_materials` in the remote repository is shown in Figure 5.
 
 ![Synch raw materials.](./media2/13_AddRawMaterials.png){#fig:RawMaterials_local}
+
+
+#### Unpacking your code & flattening of tarballs
+If the raw source code is an archived and/or compressed file (.tar or .zip), you should unpack it locally on your computer. 
+
+Tarballs distributed by projects often include a single top-level directory
+(e.g., `project-1.0/`) to avoid “tarbombs.” For curation purposes, such
+artificial wrappers should be stripped so that all source files live at the
+root of the curated version directory.
+
+For historical accuracy purpose we will upload both your source code in its initial format, and in its machine-readable format. 
 
 Fill in the metadata
 ----------------------------------
