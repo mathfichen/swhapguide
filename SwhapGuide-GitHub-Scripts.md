@@ -463,31 +463,18 @@ The different .json report files can be downloaded in the summary page of the ru
 Build and publish {#sec:build}
 ======================================
 
-If the dryrun ran successfully, you are now ready to run the `Build SourceCode + Publish` workflow, that will actually build the SourceCode branch and publish it in your working repository. 
-In the Action tab, select the workflow and click on `Run workflow`.
+If the dryrun ran successfully, you are now ready to run the `Build SourceCode + Publish` workflow, that will actually build the SourceCode branch and publish it in your working repository. The workflow will also re-run the compliance check, similarly to the Dryrun.  
+In the `Action` tab, select the workflow `Build SourceCode + Publish` and click on `Run workflow`.
 
 If the script ran successfully, a green check mark will appear next to it in the `Actions` section of your repository. 
 You should now have two branches, the `main` branch and the `SourceCode` branch. The `SourceCode` branch is an orphan branch, meaning it did not inherit previous commits from the main branch. It should display the latest version of your software ; the previous versions are flagged as individua releases in the development history of the branch.  
 
-![Successful script.](./media2/12_sucess.png){#fig:SuccessScript}
+![Successful script.](./media2/17_sucess.png){#fig:SuccessScript}
 
 In case of failure
 ----------------------------------
 
 If the script fails, the SourceCode branch won't be created. The issue probably lies in a failure of one of the compliance checks performed by the script. On the `Actions` view, click on the failed run. At the bottom of the page you will find a `revalidate-report.json` file that you can download. It should help you to identify which check did not pass and to correct it.  
-
-Here is the list of checks performed:
-
-| Family | Checks | Example |
-|---|---|---|
-| **TF** | Tree fidelity — verifies that the data extracted from raw_materials (files, content and structure) matches what is pushed into the SourceCode branch (nothing leaked, nothing missing)? | 
-| **BP** | Branch purity — does each branch hold only what it should, as per the conceptual model? |
-| **CSV** | Manifest grammar — verifies that version_history.csv is a well formed csv file, with the canonical header, ISO dates, well-formed rows. |
-| **CM** | CodeMeta validity — checks that codemeta.json respects CodeMeta nomenclature |
-| **SZ** | Size - check the size of each item. Github rejects file of 100MiB or bigger.  | 
-| **PI** | Personal-information — looks for real personal email addresses in metadata/version_history.csv and raises a WARN (never a FAIL), so nobody publishes an email by accident. |
-| **JC** | Journal coverage — every commit/tag is recorded in `journal.jsonl`. journal.json is created automatically | 
-| **DV** | Divergence — makes sure a rebuild can’t silently overwrite history that’s already published. If no SourceCode branch as already been published, this test is skipped | 
 
 
 Note on Preserving Empty Directories
