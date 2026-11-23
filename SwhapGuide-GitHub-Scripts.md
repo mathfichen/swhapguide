@@ -469,7 +469,6 @@ In the `Action` tab, select the workflow `Build SourceCode + Publish` and click 
 If the script ran successfully, a green check mark will appear next to it in the `Actions` section of your repository. 
 You should now have two branches, the `main` branch and the `SourceCode` branch. The `SourceCode` branch is an orphan branch, meaning it did not inherit previous commits from the main branch. It should display the latest version of your software ; the previous versions are flagged as individua releases in the development history of the branch.  
 
-![Successful script.](./media2/17_sucess.png){#fig:SuccessScript}
 
 In case of failure
 ----------------------------------
