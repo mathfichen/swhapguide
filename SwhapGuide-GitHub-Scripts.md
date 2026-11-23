@@ -417,7 +417,7 @@ The Dryun workflow will inspect the different files you uploaded and try to cons
 
 To run the script, click on `Actions` on the ribbon at the top of the page, then on `Dryrun` on the left panel, and finally on the green button `Run workflow`. If the run succeeds, a green checkmark should appear next to it. 
 
-![Run script.](./media2/15_runScript_2.png){#fig:RunScript}
+![Run script.](./media2/15_runScript_2.PNG){#fig:RunScript}
 
 Below are the different steps taken by the workflow.
 
@@ -434,7 +434,7 @@ Extract and build
 
 This is a test done in the runner, not in your actual repository. To check that everything went as planned, you can check the output file `repo-snapshot.json`, showing you the final structure of your SourceCode branch.
 
-Validation gate
+Compliance gate
 ----------------------------------
 
 The workflow will finally launch `swhap-validate`, that will perform a series of checks to make sure that your repository is compliant and ready for archiving. 
@@ -454,30 +454,20 @@ Here is the list of checks performed:
 
 A `validator-report.json` file is created, showing you each test and wether it passed or failed. 
 
+Check reports
+----------------------------------
+
 The different .json report files can be downloaded in the summary page of the run you just did, in the `Artefacts` section at the bottom. 
 ![Download_report.](./media2/15_download_report.PNG){#fig:Report}
 
 Build and publish {#sec:build}
 ======================================
 
-a mettre à jour
-
-Run the script
-----------------------------------
-
-Now that your source code files are uploaded and the metadata registered, you are ready to run the automation script. 
-The script will perform the following tasks: 
-
-1) For each machine-readable source code item in `raw_materials`, the script will unpack it, remove possible unnecessary parent folder, deal with empty directories (see below) and cleanly store it in the `source_code` folder
-2) The script will then create a new branch called `SourceCode`. This branch will be populated using the content of the `source_code`folder, recreating the synthetic history of the code, i.e, it will reconstruct a versionned view of the code, where each version will correspond to one commit. The script will use the data you registered in `version_history.csv` as commit data.
-3) The script will perform a series of checks to make sure that your repository is compliant and ready for archiving 
-
-To run the script, click on `Actions` on the ribbon at the top of the page, then on `Build SourceCode + publish` on the left panel, and finally on the green button `Run workflow`.
-
-
+If the dryrun ran successfully, you are now ready to run the `Build SourceCode + Publish` workflow, that will actually build the SourceCode branch and publish it in your working repository. 
+In the Action tab, select the workflow and click on `Run workflow`.
 
 If the script ran successfully, a green check mark will appear next to it in the `Actions` section of your repository. 
-you should now have two branches, the `main` branch and the `SourceCode` branch. The `SourceCode` branch is an orphan branch, meaning it did not inherit previous commits from the main branch. It should display the latest version of your software ; the previous versions are flagged as individua releases in the development history of the branch.  
+You should now have two branches, the `main` branch and the `SourceCode` branch. The `SourceCode` branch is an orphan branch, meaning it did not inherit previous commits from the main branch. It should display the latest version of your software ; the previous versions are flagged as individua releases in the development history of the branch.  
 
 ![Successful script.](./media2/12_sucess.png){#fig:SuccessScript}
 
