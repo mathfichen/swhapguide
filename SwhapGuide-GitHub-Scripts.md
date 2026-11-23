@@ -46,7 +46,7 @@ The guide is divided into three sections, each of them can be read and executed 
 
 Note that the process aims at preserving legacy source code and related materials in a **digital** format, to ensure long term availability of the curated materials and the possibility to share and present it to a broad audience. 
 
-This document builds up on the SWHAP, the ***SoftWare Heritage Acquisition Process*** (@swhcacm2018) to rescue, curate and illustrate landmark legacy software source code. The initial version of this guide was published in 2019 as a joint initiative of Software Heritage and the University of Pisa, in collaboration with UNESCO [^1]. A practical implementation of the SWHAP was proposed by Pisa Univeristy in the [SWHAPPE (SWHAP Pisa Enactor)](https://github.com/SoftwareHeritage/swhapguide/blob/master/SWHAP%40Pisa.pdf)[^2] in 2022, and a [simplified version](https://github.com/SoftwareHeritage/swhapguide/blob/master/SwhapGuide-GitHub-CLI.pdf)[^3] was produced in 2024.
+This document builds up on the SWHAP, the ***Software Heritage Acquisition Process*** (@swhcacm2018) to rescue, curate and illustrate landmark legacy software source code. The initial version of this guide was published in 2019 as a joint initiative of Software Heritage and the University of Pisa, in collaboration with UNESCO [^1]. A practical implementation of the SWHAP was proposed by Pisa Univeristy in the [SWHAPPE (SWHAP Pisa Enactor)](https://github.com/SoftwareHeritage/swhapguide/blob/master/SWHAP%40Pisa.pdf)[^2] in 2022, and a [simplified version](https://github.com/SoftwareHeritage/swhapguide/blob/master/SwhapGuide-GitHub-CLI.pdf)[^3] was produced in 2024.
 
 The present guide builds up on the latest 2024 version. While the fundamental logic is left untouched, this updated guide incorporates new tools that will allow you to archive code much more quickly, thanks to the automation of some tasks which were previsouly done manually. In this version, everything can be done in the browser, and no command lines instructions are required. 
 
@@ -120,13 +120,13 @@ Note that these videos were made on the 2024 version of the guide. The core logi
 Process Overview {#sec:overview}
 ======================================
 The SWHAP process broadly consists of the following steps:
-1) **Duplicate a provided Github template**: this will become the Github repository in which you will be working
-2) **Fill in metadata and upload source code artefacts**: in this repository, fill in the provided metadata files and upload your source code files
+1) **Create your working repository**: Duplicate a provided Github template, which will become your workbench, the Github repository in which you will be working
+2) **Upload source code artefacts and fill in metadata**: in this repository, fill in the provided metadata files and upload your source code files
 3) **Run a Dryrun**: the `Dryrun` workflow will automatically check that the files and data you provided are ready to be processed
 4) **Build and Publish**: The `Build and Publish` workflow will automatically build the final repository according to the SWHAP conceptual model (see {#sec:concept}) 
 6) **Trigger the Software Heritage Archival**: archive your code in the Software Heritage universal archive 
 
-The biggest part of your work is to upload your legacy code pieces and to fill in the metadata. 
+The biggest part of your work is to upload your legacy code pieces and to fill in the metadata (step 2). 
 
 Requirements and setup {#sec:requirements}
 ======================================
@@ -240,7 +240,7 @@ Final Github repository structure
 The structure we want to achieve on Github before launching the archival on the Software Heritage archive is the following. We will create at public repository, named after the software you want to archive (here called _MySoftware_). This repository has two branches (see figure 1):
 
 1) The _Main_ branch contains all your initial materials (_Raw Materials_), your source code in machine readable format (_Source Code_), the relevant Metadata as well as a ReadMe file helping a future visitor to navigate the repository. This branch contains all the historical artefacts and metadata, allowing a viewer to understand the software as a historical object.
-2) The _SourceCode_ branch contains the reconstructed development history of your source code. Each version of your code is "stacked" one upon the other using Git "commit" mechanisms. One version corresponds to one _commit_ and one annotate _tag_. This reconstructed version allows a future viewer to navigate into the code as they would for any contemporary software. This vision is anachronous but easier to navigate.
+2) The _SourceCode_ branch contains the reconstructed development history of your source code. Each version of your code is "stacked" one upon the other using Git "commit" mechanisms. One version corresponds to one _commit_ and one annotate _tag_. This reconstructed version allows a future viewer to navigate into the code as they would for any contemporary software. This vision is anachronous.
 
 
 ![Final Github repository structure.](./media2/01_RepoStructure.png){#fig:repoStructure}
@@ -254,15 +254,11 @@ If you are not familiar with Git:
 - Important commits can be _tagged_, to help navigate in the successive versions of a code. 
   
 
-Prepare your code {#sec:prepare}
+Create your working repository {#sec:workbench}
 ======================================
 
-
-Set up your working environment
-----------------------------------
-
 To archive your legacy source code we will be using Github, and we prepared a Github template that you can clone (if you are not familiar with Github lingo _to clone_ means _to make a copy_) to create your own working space. 
-Visit the template page on Github[^8], on the upper right hand corner click on `Use this template` > `Create a new repository` (see figure 3). 
+Visit the template page on Github [^8], on the upper right hand corner click on `Use this template` > `Create a new repository` (see figure 3). 
 
 [^8]: https://github.com/SWHAP/swhap-workbench-template
 
@@ -272,7 +268,7 @@ The repository you will create is your working environment, and we recommend nam
 
 ![Create your Workbench.](./media2/02_CreateWorkbecnh_NEW.png){#fig:createWorkbench}
 
-Via the Github interface you can edit the `Read.me` file, using the actual name of your software. Add a short description of the software and also the context in which this archival process is taking place and who is involved in it. 
+Via the Github interface you can edit the `Read.me` file, using the actual name of your software. Add a short description of the software and also **the context in which this archival process is taking place and who is involved in it**. 
 To edit a file in Github click on the pencil symbol. When you are done editing, click on `Commit` to save your changes. 
 
 <!--
@@ -293,14 +289,17 @@ In our case the interpreter current directory is `/home/mathfichen`, so we juste
 	cd MySoftware_Workbench
 -->
 
-Upload collected files
+Upload source code artefacts and fill in metadata {#sec:workbench}
+======================================
+
+Upload collected source code files and other material
 ----------------------------------
 
 You are now ready to upload your materials. Navigate to the `raw_materials` folder. This folder is meant to store all your initial materials, to help any future viewer understand the origin of the code. This covers the source code in its initial format (scanned listing, compressed file etc.) as well as any contextual element. For example, if the source code was sent over to you by the historical author via email, you can also store this email. You can also store any item you may deem relevant to understand the historical context in which the software was produced, such as technical documentation. 
 
 To add your material, just click on the `Add file` button on the top right corner and select them from your computer. 
 In our case we uploaded three documents: a scanned and OCRed listing from 1971 and a later digital version from 1972 in a compressed file. 
-For historical accuracy purpose uploaded both your source code in its initial format (a scanned listing for example), and in its machine-readable format. Only the machine readable files will be used from now on. 
+For historical accuracy purpose upload both your source code in its initial format (a scanned listing for example), and in its machine-readable format if one differ from the other. Only the machine readable files will be used from now on. 
 
 
 <!--
@@ -334,7 +333,7 @@ Fill in the metadata
 Navigate to the `metadata` folder. It contains different metadata fils, some are for humans to read, some will be used later in the automated process. 
 
 ### Catalogue
-`catalogue.md` is for human to read.  This file will help any future viewer to better understand the different items you uploaded, especially their origin and possible license or copyright. Edit the file, filing in the metadata linked to each item your uploaded.
+`catalogue.md` is for human to read.  This file will help any future viewer to better understand the different items you uploaded, especially their origin and possible license or copyright. Edit the file, filing in the metadata linked to each item you uploaded.
 
 ### Extraction recipe
 During the automated phase that will prepare your repo for archival, a script will extract the machine-readable files you just uploaded, unzip or unpack them if they are compressed and cleanly store them each in a different subfolder with the `source_code` folder. 
@@ -351,7 +350,7 @@ In `extraction-recipe.yaml` you must indicate the path to each machine-readable 
 
 
 ### Version history
-The version_history.csv file will also be used during the automated process. It acts as the source of truht regarding the history of the software. When reconstructing the synthetic view of the code, the script will use the data contained in this file to correctly set the metadata of each commit (one commit corresponding of a version of your code). Note that we here distinguish who is the actual author of the code from the person performing the archival process. **Note that the `directory` field should match the label you gave each item in `extraction-recipe.yaml`.** This label acts as a join key between the two files.
+The version_history.csv file will also be used during the automated process. It acts as the source of truht regarding the history of the software. When reconstructing the synthetic view of the code, the script will use the data contained in this file to correctly set the metadata of each commit (one commit corresponding of a version of your code). We distinguish who is the actual author of the code from the person performing the archival process. **Note that the `directory` field should match the label you gave each item in `extraction-recipe.yaml`.** This label acts as a join key between the two files.
 
 Fields in version_history.csv cannot be left empty. If you miss one information (for example the email of the author), use the empty value instead `<>`
 
@@ -414,7 +413,49 @@ The CodeMeta project defines a standard JSON structure for software metadata. On
 Run a Dryrun {#sec:dryrun}
 ======================================
 
-a completer
+The Dryun workflow will inspect the different files you uploaded and try to construct the SourceCode branch. This is done in Github runner, a virtual ephemeral environment ; no actions will be actually performed on your repository. The goal is to test that everything runs smoothly. 
+
+To run the script, click on `Actions` on the ribbon at the top of the page, then on `Dryrun` on the left panel, and finally on the green button `Run workflow`. If the run succeeds, a green checkmark should appear next to it. 
+
+![Run script.](./media2/15_runScript_2.png){#fig:RunScript}
+
+Below are the different steps taken by the workflow.
+
+Inspect raw material
+----------------------------------
+
+The workflow will launch `swhap-inspect`, the archive safety check. It opens each archived file (typically files with in `.tar`, or `.zip` or other compressed or archived extensions) , lists its members without extracting anything, and tests them against a set of rejection rules. The output is stored in `inspect.json`.
+
+Extract and build
+----------------------------------
+
+1) For each machine-readable source code item in `raw_materials`, the script will unpack it, remove possible unnecessary parent folder, deal with empty directories (see below) and cleanly store it in the `source_code` folder
+2) The script will then create a new branch called `SourceCode`. This branch will be populated using the content of the `source_code`folder, recreating the synthetic history of the code, i.e, it will reconstruct a versionned view of the code, where each version will correspond to one commit. The script will use the data you registered in `version_history.csv` as commit data.
+
+This is a test done in the runner, not in your actual repository. To check that everything went as planned, you can check the output file `repo-snapshot.json`, showing you the final structure of your SourceCode branch.
+
+Validation gate
+----------------------------------
+
+The workflow will finally launch `swhap-validate`, that will perform a series of checks to make sure that your repository is compliant and ready for archiving. 
+
+Here is the list of checks performed:
+
+| Family | Checks | Example |
+|---|---|---|
+| **TF** | Tree fidelity — verifies that the data extracted from raw_materials (files, content and structure) matches what is pushed into the SourceCode branch (nothing leaked, nothing missing)? | 
+| **BP** | Branch purity — does each branch hold only what it should, as per the conceptual model? |
+| **CSV** | Manifest grammar — verifies that version_history.csv is a well formed csv file, with the canonical header, ISO dates, well-formed rows. |
+| **CM** | CodeMeta validity — checks that codemeta.json respects CodeMeta nomenclature |
+| **SZ** | Size - check the size of each item. Github rejects file of 100MiB or bigger.  | 
+| **PI** | Personal-information — looks for real personal email addresses in metadata/version_history.csv and raises a WARN (never a FAIL), so nobody publishes an email by accident. |
+| **JC** | Journal coverage — every commit/tag is recorded in `journal.jsonl`. journal.json is created automatically | 
+| **DV** | Divergence — makes sure a rebuild can’t silently overwrite history that’s already published. If no SourceCode branch as already been published, this test is skipped | 
+
+A `validator-report.json` file is created, showing you each test and wether it passed or failed. 
+
+The different .json report files can be downloaded in the summary page of the run you just did, in the `Artefacts` section at the bottom. 
+![Download_report.](./media2/15_download_report.PNG){#fig:Report}
 
 Build and publish {#sec:build}
 ======================================
@@ -433,7 +474,7 @@ The script will perform the following tasks:
 
 To run the script, click on `Actions` on the ribbon at the top of the page, then on `Build SourceCode + publish` on the left panel, and finally on the green button `Run workflow`.
 
-![Run script.](./media2/15_runScript.png){#fig:RunScript}
+
 
 If the script ran successfully, a green check mark will appear next to it in the `Actions` section of your repository. 
 you should now have two branches, the `main` branch and the `SourceCode` branch. The `SourceCode` branch is an orphan branch, meaning it did not inherit previous commits from the main branch. It should display the latest version of your software ; the previous versions are flagged as individua releases in the development history of the branch.  
